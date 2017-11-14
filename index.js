@@ -1,4 +1,4 @@
-import {DeviceEventEmitter, NativeEventEmitter, NativeModules, Platform} from "react-native";
+import {NativeEventEmitter, NativeModules, Platform} from "react-native";
 const {RNAliyunOSS} = NativeModules;
 
 let subscription;
@@ -61,7 +61,7 @@ export default AliyunOSS = {
      * @param callback a callback function accepts one params: event
      */
     addEventListener(event, callback) {
-        const RNAliyunEmitter = Platform.OS === 'ios' ? new NativeEventEmitter(RNAliyunOSS) : new DeviceEventEmitter(RNAliyunOSS);
+        const RNAliyunEmitter = new NativeEventEmitter(RNAliyunOSS);
         switch (event) {
             case 'uploadProgress':
                 subscription = RNAliyunEmitter.addListener(
